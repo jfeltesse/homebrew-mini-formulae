@@ -2,8 +2,8 @@ class VimMini < Formula
   desc "Minimalistic Vim formula with optional dependencies"
   homepage "https://vim.sourceforge.io/"
   # vim should only be updated every 50 releases on multiples of 50
-  url "https://github.com/vim/vim/archive/v8.0.1400.tar.gz"
-  sha256 "9e9cdfc137858f2d52276b6df826875aafc9d65b3e46d5d7f8c68deb40da3dbb"
+  url "https://github.com/vim/vim/archive/v8.0.1500.tar.gz"
+  sha256 "c2dc97680ca7d8c4e623bb457f6698879bb06d29499b1ecb6b86fdedc1d0afd3"
   head "https://github.com/vim/vim.git"
 
   option "with-override-system-vi", "Override system vi"
