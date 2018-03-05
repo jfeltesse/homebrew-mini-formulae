@@ -1,18 +1,19 @@
 class VimMini < Formula
   desc "Minimalistic Vim formula with optional dependencies"
-  homepage "https://vim.sourceforge.io/"
+  homepage "https://www.vim.org/"
   # vim should only be updated every 50 releases on multiples of 50
-  url "https://github.com/vim/vim/archive/v8.0.1500.tar.gz"
-  sha256 "c2dc97680ca7d8c4e623bb457f6698879bb06d29499b1ecb6b86fdedc1d0afd3"
+  url "https://github.com/vim/vim/archive/v8.0.1553.tar.gz"
+  sha256 "c7d6e4b44be07601deedda747dd26cced2d6b8d36e109ce0cf7a134addaf3cf8"
+  revision 1
   head "https://github.com/vim/vim.git"
 
   option "with-override-system-vi", "Override system vi"
   option "with-gettext", "Build vim with National Language Support (translated messages, keymaps)"
   option "with-client-server", "Enable client/server mode"
 
-  LANGUAGES = %w[lua luajit perl python python3 ruby].freeze
+  LANGUAGES = %w[lua luajit perl python python@2 ruby].freeze
   CUSTOM_MESSAGES = {
-    "python3" => "Build vim with python3 instead of python[2] support",
+    "python@2" => "Build vim with python@2 instead of python[3] support",
   }.freeze
 
   LANGUAGES.each do |language, msg|
@@ -23,7 +24,7 @@ class VimMini < Formula
   depends_on "luajit" => :optional
   depends_on "perl" => :optional
   depends_on "python" => :optional
-  depends_on "python3" => :optional
+  depends_on "python@2" => :optional
   depends_on "ruby" => :optional
   depends_on "gettext" => :optional
   depends_on :x11 if build.with? "client-server"
@@ -54,9 +55,9 @@ class VimMini < Formula
       end
     end
 
-    if build.with?("python") || build.with?("python3")
-      # python 2 takes precedence if both options have been set
-      python = build.with?("python") ? "python" : "python3"
+    if build.with?("python") || build.with?("python@2")
+      # python 3 takes precedence if both options have been set
+      python = build.with?("python") ? "python3" : "python"
       opts << "--enable-#{python}interp"
 
       ENV.prepend_path "PATH", Formula[python].opt_libexec/"bin"
@@ -104,14 +105,14 @@ class VimMini < Formula
   end
 
   test do
-    if build.with? "python3"
+    if build.with? "python"
       (testpath/"commands.vim").write <<~EOS
         :python3 import vim; vim.current.buffer[0] = 'hello python3'
         :wq
       EOS
       system bin/"vim", "-T", "dumb", "-s", "commands.vim", "test.txt"
       assert_equal "hello python3", File.read("test.txt").chomp
-    elsif build.with? "python"
+    elsif build.with? "python@2"
       (testpath/"commands.vim").write <<~EOS
         :python import vim; vim.current.buffer[0] = 'hello world'
         :wq
