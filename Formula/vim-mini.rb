@@ -2,9 +2,8 @@ class VimMini < Formula
   desc "Minimalistic Vim formula with optional dependencies"
   homepage "https://www.vim.org/"
   # vim should only be updated every 50 releases on multiples of 50
-  url "https://github.com/vim/vim/archive/v8.0.1800.tar.gz"
-  sha256 "388af19df5813db4f7fe524119699a62969299cb3f78314293c9e7058ca238fb"
-  revision 1
+  url "https://github.com/vim/vim/archive/v8.1.0001.tar.gz"
+  sha256 "c342acaa26589f371fa34a5ca213b95811f26185c12443f8f48ad2868dee2935"
   head "https://github.com/vim/vim.git"
 
   option "with-override-system-vi", "Override system vi"
@@ -42,9 +41,14 @@ class VimMini < Formula
     opts = []
 
     if build.with?("lua") || build.with?("luajit")
-      ENV["LUA_PREFIX"] = HOMEBREW_PREFIX
       opts << "--enable-luainterp"
-      opts << "--with-luajit" if build.with? "luajit"
+
+      if build.with?("luajit")
+        opts << "--with-luajit"
+        opts << "--with-lua-prefix=#{Formula["luajit"].opt_prefix}"
+      else
+        opts << "--with-lua-prefix=#{Formula["lua"].opt_prefix}"
+      end
 
       if build.with?("lua") && build.with?("luajit")
         onoe <<~EOS
