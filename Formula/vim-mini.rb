@@ -1,8 +1,8 @@
 class VimMini < Formula
   desc "Minimalistic Vim formula with optional dependencies"
   homepage "https://www.vim.org/"
-  url "https://github.com/vim/vim/archive/v8.1.0500.tar.gz"
-  sha256 "4ba0e6e099c4a6565e1c510ef3a26e452eed1b3ff8a8e02ada9b66c164da785e"
+  url "https://github.com/vim/vim/archive/v8.1.0600.tar.gz"
+  sha256 "d956af8cc04a9ab965e54b26e5938d266df9f128ad7e983ea6da94dd4b4eda9b"
   head "https://github.com/vim/vim.git"
 
   option "with-override-system-vi", "Override system vi"
