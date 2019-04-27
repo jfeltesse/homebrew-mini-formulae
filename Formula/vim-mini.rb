@@ -1,8 +1,8 @@
 class VimMini < Formula
   desc "Minimalistic Vim formula with optional dependencies"
   homepage "https://www.vim.org/"
-  url "https://github.com/vim/vim/archive/v8.1.1100.tar.gz"
-  sha256 "d7f59c2a0a16983d71f0bb27560356fd1602134037abdecd90e4280f3cafa8e3"
+  url "https://github.com/vim/vim/archive/v8.1.1200.tar.gz"
+  sha256 "2238057e9bb402baaab9f042ce43d15616b8e526b355ca5b1d8ca5ef6a04b0af"
   head "https://github.com/vim/vim.git"
 
   LANGUAGES = %w[lua perl python ruby].freeze
